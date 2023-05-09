@@ -1,6 +1,7 @@
 package main
 
 import (
+    "fmt"
     "github.com/arch4ngel/go-commoners/net"
     "github.com/arch4ngel/go-commoners/rando/server"
     "github.com/spf13/cobra"
@@ -16,10 +17,18 @@ var (
         Short:   serverCmdDesc,
         Long:    serverCmdDesc,
         Run: func(cmd *cobra.Command, args []string) {
-            if _, err := net.FindInterface(strings.Split(serverAddress, ":")[0]); err != nil {
-                ERR.Fatalf(err.Error())
+            var a, p string
+            s := strings.Split(serverAddress, ":")
+            if len(s) < 2 {
+                ERR.Fatalf("Socket input is expected")
             }
-            server.RandoServer(serverAddress).Start()
+            a = s[0]
+            p = s[1]
+            if a, err := net.FindInterface(a); err != nil {
+                ERR.Fatalf(err.Error())
+            } else {
+                server.RandoServer(fmt.Sprintf("%s:%s", a, p)).Start()
+            }
         },
     }
 )
