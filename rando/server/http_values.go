@@ -36,6 +36,10 @@ type AsciiQueryBind struct {
 type PassphraseQueryBind struct {
     MinLenQueryBind
     DelimiterQueryBind
+    // RandFix determines if a 1-15 random value will be added
+    // to the beginning and end of the output, thus enhancing
+    // randomization.
+    RandFix bool `form:"rand-fix" binding:"boolean"`
 }
 
 // DnsQueryBind provides a binding for DNS value requests.

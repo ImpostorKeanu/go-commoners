@@ -85,9 +85,13 @@ func passphraseHandler(c *gin.Context) {
         })
         return
     }
+    v := rando.AnyString(q.MinLen, q.Delimiter)
+    if q.RandFix {
+        v, _ = rando.AnyAsciiRandfix(v, q.Delimiter, 15)
+    }
     c.JSON(http.StatusOK, StandardResp{
         SuccessRespField: SuccessRespField{true},
-        Value:            rando.AnyString(q.MinLen, q.Delimiter),
+        Value:            v,
     })
 }
 
