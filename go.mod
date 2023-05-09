@@ -3,7 +3,6 @@ module github.com/arch4ngel/go-commoners
 go 1.19
 
 require (
-	git.nopsled.me/justin.angel/go-rando v0.0.4
 	github.com/gin-gonic/gin v1.9.0
 	github.com/google/uuid v1.3.0
 	github.com/spf13/cobra v1.7.0
