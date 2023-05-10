@@ -72,6 +72,9 @@ func loadValues(embedded embed.FS, dest *[]string) {
         for scanner.Scan() {
             *dest = append(*dest, strings.ToLower(scanner.Text()))
         }
-
+        if err = scanner.Err(); err != nil {
+            fmt.Sprintf("failed to parse wordlist: %v")
+            panic(err)
+        }
     }
 }
