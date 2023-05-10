@@ -287,6 +287,8 @@ func UintGTZ(max uint) (out uint, err error) {
     return out, err
 }
 
+// AnyAsciiRandfix concatenates a random ASCII string of 1 to min length to the
+// beginning and end of in. This aims to enhance randomization of values.
 func AnyAsciiRandfix(in, del string, min uint) (_ string, err error) {
     if err = gtz(min); err == nil {
         r, _ := UintGTZ(min)

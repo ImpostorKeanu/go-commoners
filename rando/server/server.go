@@ -6,8 +6,8 @@ import (
     "net/http"
 )
 
-// RandoServer represents a Gin HTTP server used to offer
-// various random value generation across the network.
+// RandoServer is a Gin HTTP server used to offer various random value
+// generation via REST API.
 //
 // It should be initialized to a string value formatted
 // as a socket that the server will listen on.
@@ -86,8 +86,8 @@ func passphraseHandler(c *gin.Context) {
         return
     }
     v := rando.AnyString(q.MinLen, q.Delimiter)
-    if q.RandFix {
-        v, _ = rando.AnyAsciiRandfix(v, q.Delimiter, 15)
+    if q.RandFixLength > 0 {
+        v, _ = rando.AnyAsciiRandfix(v, q.Delimiter, q.RandFixLength)
     }
     c.JSON(http.StatusOK, StandardResp{
         SuccessRespField: SuccessRespField{true},
@@ -132,7 +132,6 @@ func hostnameHandler(c *gin.Context) {
 // performs DNS resolution to determine if an A record for
 // it already exists.
 func dnsHandler(c *gin.Context) {
-
     q := DnsQueryBind{}
     if err := c.ShouldBindQuery(&q); err != nil {
         c.AbortWithStatusJSON(http.StatusBadRequest, ErrResp{
@@ -141,7 +140,6 @@ func dnsHandler(c *gin.Context) {
         })
         return
     }
-
     fqdn, resolved, ips, err := rando.DnsUntil(q.NounType, q.ApexDomain, q.UniqueRequired)
     if err != nil {
         c.AbortWithStatusJSON(http.StatusOK, ErrResp{

@@ -7,7 +7,7 @@ import (
 
 // AllowNumbersQueryBind provides an AllowNumbers field.
 type AllowNumbersQueryBind struct {
-    AllowNumbers bool `form:"allow-numbers"`
+    AllowNumbers bool `form:"allow_numbers"`
 }
 
 // DelimiterQueryBind provides a Delimiter field.
@@ -17,12 +17,12 @@ type DelimiterQueryBind struct {
 
 // MinLenQueryBind provides a MinLen field.
 type MinLenQueryBind struct {
-    MinLen uint32 `form:"min-len" binding:"gt=0"`
+    MinLen uint32 `form:"min_len" binding:"gt=0"`
 }
 
-// NounTypeQueryBind provides a binding for noun type query values..
+// NounTypeQueryBind provides a binding for noun type query values.
 type NounTypeQueryBind struct {
-    NounType nouns.NounType `form:"noun-type" binding:"required,oneof=common proper"`
+    NounType nouns.NounType `form:"noun_type" binding:"required,oneof=common proper"`
 }
 
 // AsciiQueryBind provides a binding for ASCII value requests.
@@ -36,21 +36,21 @@ type AsciiQueryBind struct {
 type PassphraseQueryBind struct {
     MinLenQueryBind
     DelimiterQueryBind
-    // RandFix determines if a 1-15 random value will be added
+    // RandFixLength determines if a 1-15 random value will be added
     // to the beginning and end of the output, thus enhancing
     // randomization.
-    RandFix bool `form:"rand-fix" binding:"boolean"`
+    RandFixLength uint `form:"rand_fix_len"`
 }
 
 // DnsQueryBind provides a binding for DNS value requests.
 type DnsQueryBind struct {
     NounTypeQueryBind
     // ApexDomain for the value, e.g., google.com
-    ApexDomain string `form:"apex-domain" binding:"hostname,required"`
+    ApexDomain string `form:"apex_domain" binding:"hostname,required"`
     // UniqueRequired determines if DNS queries should be performed to
     // determine if the newly generated value is unique. Generation will
     // continue until a unique value is produced.
-    UniqueRequired bool `form:"unique-required" binding:"boolean"`
+    UniqueRequired bool `form:"unique_required" binding:"boolean"`
 }
 
 // SuccessRespField is the success field for server
