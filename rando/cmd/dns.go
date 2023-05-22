@@ -2,8 +2,8 @@ package main
 
 import (
     "fmt"
-    "github.com/ImpostorKeanu/go-commoners/rando"
-    "github.com/ImpostorKeanu/go-commoners/rando/nouns"
+    "github.com/impostorkeanu/go-commoners/rando"
+    "github.com/impostorkeanu/go-commoners/rando/nouns"
     "github.com/spf13/cobra"
     "os"
 )

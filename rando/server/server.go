@@ -1,7 +1,7 @@
 package server
 
 import (
-    rando "github.com/ImpostorKeanu/go-commoners/rando"
+    rando "github.com/impostorkeanu/go-commoners/rando"
     "github.com/gin-gonic/gin"
     "net/http"
 )

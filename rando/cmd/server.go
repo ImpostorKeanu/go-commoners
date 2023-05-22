@@ -2,8 +2,8 @@ package main
 
 import (
     "fmt"
-    "github.com/ImpostorKeanu/go-commoners/net"
-    "github.com/ImpostorKeanu/go-commoners/rando/server"
+    "github.com/impostorkeanu/go-commoners/net"
+    "github.com/impostorkeanu/go-commoners/rando/server"
     "github.com/spf13/cobra"
     "strings"
 )

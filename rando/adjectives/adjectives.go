@@ -1,7 +1,7 @@
 package adjectives
 
 import (
-    "github.com/ImpostorKeanu/go-commoners/rando/shared"
+    "github.com/impostorkeanu/go-commoners/rando/shared"
 )
 
 var (

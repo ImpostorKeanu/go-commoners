@@ -2,7 +2,7 @@ package main
 
 import (
     "fmt"
-    "github.com/ImpostorKeanu/go-commoners/rando"
+    "github.com/impostorkeanu/go-commoners/rando"
     "github.com/spf13/cobra"
 )
 
