@@ -1,4 +1,4 @@
-module github.com/ImpostorKeanu/go-commoners
+module github.com/impostorkeanu/go-commoners
 
 go 1.19
 
