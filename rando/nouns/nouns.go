@@ -3,7 +3,7 @@ package nouns
 import (
     "errors"
     "fmt"
-    "github.com/arch4ngel/go-commoners/rando/shared"
+    "github.com/ImpostorKeanu/go-commoners/rando/shared"
     "golang.org/x/exp/slices"
 )
 

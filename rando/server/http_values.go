@@ -1,7 +1,7 @@
 package server
 
 import (
-    "github.com/arch4ngel/go-commoners/rando/nouns"
+    "github.com/ImpostorKeanu/go-commoners/rando/nouns"
     "net"
 )
 

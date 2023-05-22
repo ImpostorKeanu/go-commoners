@@ -1,4 +1,4 @@
-module github.com/arch4ngel/go-commoners
+module github.com/ImpostorKeanu/go-commoners
 
 go 1.19
 

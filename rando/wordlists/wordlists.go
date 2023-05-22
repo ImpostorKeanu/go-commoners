@@ -5,8 +5,8 @@ import (
     "bytes"
     "embed"
     "fmt"
-    "github.com/arch4ngel/go-commoners/rando/adjectives"
-    "github.com/arch4ngel/go-commoners/rando/nouns"
+    "github.com/ImpostorKeanu/go-commoners/rando/adjectives"
+    "github.com/ImpostorKeanu/go-commoners/rando/nouns"
     "io/fs"
     "strings"
 )
