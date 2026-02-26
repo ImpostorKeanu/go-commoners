@@ -1,8 +1,11 @@
 module github.com/impostorkeanu/go-commoners
 
-go 1.19
+go 1.24.4
+
+toolchain go1.24.5
 
 require (
+	github.com/TwiN/go-away v1.8.1
 	github.com/gin-gonic/gin v1.9.0
 	github.com/google/uuid v1.3.0
 	github.com/spf13/cobra v1.7.0
@@ -32,7 +35,7 @@ require (
 	golang.org/x/crypto v0.8.0 // indirect
 	golang.org/x/net v0.9.0 // indirect
 	golang.org/x/sys v0.7.0 // indirect
-	golang.org/x/text v0.9.0 // indirect
+	golang.org/x/text v0.30.0 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
