@@ -18,10 +18,7 @@ var (
 		Short:   asciiStringHelp,
 		Long:    asciiStringHelp,
 		Run: func(cmd *cobra.Command, args []string) {
-			v, _ := rando.UntilCleanString(checkProfanity, func() (string, error) {
-				return rando.AnyASCIIString(asciiLen, asciiAllownum, asciiDel), nil
-			})
-			fmt.Println(v)
+			fmt.Println(rando.AnyASCIIString(asciiLen, asciiAllownum, asciiDel))
 		},
 	}
 )

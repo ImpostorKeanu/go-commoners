@@ -59,7 +59,7 @@ func randASCIIValsHandler(c *gin.Context) {
 		return
 	}
 	v, _ := rando.UntilCleanSlice(q.CheckProfanity, func() ([]string, error) {
-		return rando.AnyAsciiSlice(q.MinLen, q.AllowNumbers), nil
+		return rando.AnyASCIISlice(q.MinLen, q.AllowNumbers), nil
 	})
 	c.JSON(http.StatusOK, RandValsResp{
 		SuccessRespField: SuccessRespField{true},

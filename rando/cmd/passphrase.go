@@ -19,15 +19,13 @@ var (
 		Short:   passphraseCmdDesc,
 		Long:    passphraseCmdDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			pp, err := rando.UntilCleanString(checkProfanity, func() (v string, err error) {
-				v = rando.AnyString(ppLen, ppDel)
-				if ppRandFix {
-					v, err = rando.AnyASCIIRandfix(v, ppDel, 15)
+			pp := rando.AnyString(ppLen, ppDel)
+			if ppRandFix {
+				var err error
+				pp, err = rando.AnyASCIIRandfix(pp, ppDel, 15)
+				if err != nil {
+					ERR.Fatalf("error while generating passphrase: %v", err)
 				}
-				return
-			})
-			if err != nil {
-				ERR.Fatalf("error while generating passphrase: %v", err)
 			}
 			INFO.Printf("value: \"%v\"", pp)
 			INFO.Printf("delimiter: \"%v\"", ppDel)

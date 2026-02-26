@@ -15,9 +15,7 @@ var (
 		Short:   hostnameCmdDesc,
 		Long:    hostnameCmdDesc,
 		Run: func(cmd *cobra.Command, args []string) {
-			hn, err := rando.UntilCleanString(checkProfanity, func() (string, error) {
-				return rando.Hostname(nounType)
-			})
+			hn, err := rando.Hostname(nounType)
 			if err != nil {
 				ERR.Fatalf("failed to generate hostname: %v", err)
 			}

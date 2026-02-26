@@ -65,11 +65,13 @@ func init() {
 //
 // nT indicates the type of noun to use, i.e., common or proper.
 func Hostname[S shared.StringType](nT S) (v string, err error) {
-	var n *string
-	if n, err = nouns.Get(nT); err == nil {
-		v = fmt.Sprintf("%v-%v", *adjectives.Get(), *n)
-	}
-	return v, err
+	return UntilCleanString(true, func() (string, error) {
+		var n *string
+		if n, err = nouns.Get(nT); err == nil {
+			v = fmt.Sprintf("%v-%v", *adjectives.Get(), *n)
+		}
+		return v, err
+	})
 }
 
 // UUID returns a UUID string.
@@ -181,32 +183,38 @@ func NounType() nouns.NounType {
 	}
 }
 
-// AnyAsciiSlice will generate any alphanumeric value, including upper case,
+// AnyASCIISlice will generate any alphanumeric value, including upper case,
 // in a slice. Suppress numbers by setting allowNumbers to false.
-func AnyAsciiSlice(minLen uint32, allowNumbers bool) (out []string) {
-	var src []string
-	out = []string{}
-	for len(out) < int(minLen) {
-		switch rand.Intn(3) {
-		case 0:
-			src = ASCIIUpper
-		case 1:
-			src = ASCIILower
-		case 2:
-			if !allowNumbers {
-				continue
+func AnyASCIISlice(minLen uint32, allowNumbers bool) []string {
+	v, _ := UntilCleanSlice(true, func() ([]string, error) {
+		var src []string
+		out := []string{}
+		for len(out) < int(minLen) {
+			switch rand.Intn(3) {
+			case 0:
+				src = ASCIIUpper
+			case 1:
+				src = ASCIILower
+			case 2:
+				if !allowNumbers {
+					continue
+				}
+				src = ASCIINumber
 			}
-			src = ASCIINumber
+			out = append(out, src[rand.Intn(len(src))])
 		}
-		out = append(out, src[rand.Intn(len(src))])
-	}
-	return out
+		return out, nil
+	})
+	return v
 }
 
 // AnyASCIIString uses AnyAsciiSlice to generate a string value that
 // was joined on del.
 func AnyASCIIString(minLen uint32, allowNumbers bool, del string) string {
-	return strings.Join(AnyAsciiSlice(minLen, allowNumbers), del)
+	v, _ := UntilCleanString(true, func() (string, error) {
+		return strings.Join(AnyASCIISlice(minLen, allowNumbers), del), nil
+	})
+	return v
 }
 
 // AnyString returns a string of random values joined by
@@ -215,7 +223,10 @@ func AnyASCIIString(minLen uint32, allowNumbers bool, del string) string {
 // minLen determines the maximum length of the values joined on an
 // empty string.
 func AnyString(minLen uint32, del string) string {
-	return strings.Join(AnySlice(minLen), del)
+	v, _ := UntilCleanString(true, func() (string, error) {
+		return strings.Join(AnySlice(minLen), del), nil
+	})
+	return v
 }
 
 // AnySlice returns a slice of random values.
@@ -223,29 +234,21 @@ func AnyString(minLen uint32, del string) string {
 // minLen determines the maximum length of the values joined on an
 // empty string.
 func AnySlice(minLen uint32) (out []string) {
-	// buffer to hold a pointer to the current
-	// string
-	var bv *string
-
-	//=========================
-	// CONSTRUCT THE PASSPHRASE
-	//=========================
-
-	for len(strings.Join(out, "")) < int(minLen) {
-
-		if shared.Rnd.Intn(2) == 1 {
-			// Get a noun of random type
-			bv, _ = nouns.Get(NounType())
-		} else {
-			// Get an adjective
-			bv = adjectives.Get()
+	v, _ := UntilCleanSlice(true, func() ([]string, error) {
+		var bv *string
+		for len(strings.Join(out, "")) < int(minLen) {
+			if shared.Rnd.Intn(2) == 1 {
+				// get a noun
+				bv, _ = nouns.Get(NounType())
+			} else {
+				// get an adjective
+				bv = adjectives.Get()
+			}
+			out = append(out, *bv)
 		}
-
-		out = append(out, *bv)
-
-	}
-
-	return out
+		return out, nil
+	})
+	return v
 }
 
 // AnyASCIIRandfix concatenates a random ASCII string of 1 to min length to the

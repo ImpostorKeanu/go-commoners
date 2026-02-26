@@ -32,6 +32,10 @@ func UntilCleanSlice(check bool, get func() ([]string, error)) (v []string, err 
 	return
 }
 
+func IsClean(s string) bool {
+	return goaway.IsProfane(s)
+}
+
 func gtz(v uint) error {
 	if v == 0 {
 		return errors.New("max must be > 0")
@@ -46,4 +50,14 @@ func UintGTZ(max uint) (out uint, err error) {
 		out = uint(rand.Intn(int(max)))
 	}
 	return out, err
+}
+
+func TemplateFuncs() map[string]any {
+	return map[string]any{
+		"randoAscii":         AnyASCIIString,
+		"randoAnyString":     AnyString,
+		"randoHostname":      Hostname[string],
+		"randoUniqueDNSName": DNSNameMustNotResolve[string],
+		"randoIsProfane":     goaway.IsProfane,
+	}
 }
