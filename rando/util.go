@@ -13,11 +13,13 @@ import (
 //
 // Setting check to false bypasses the profanity filter.
 func UntilCleanString(check bool, get func() (string, error)) (v string, err error) {
-	v, err = get()
-	for err == nil && check && goaway.IsProfane(v) {
-		v, err = get()
+	for {
+		v, err := get()
+		switch {
+		case err != nil, !check, !goaway.IsProfane(v):
+			return v, err
+		}
 	}
-	return
 }
 
 // UntilCleanSlice converts the value returned by the get function to
@@ -25,11 +27,13 @@ func UntilCleanString(check bool, get func() (string, error)) (v string, err err
 //
 // Setting check to false bypasses the profanity filter.
 func UntilCleanSlice(check bool, get func() ([]string, error)) (v []string, err error) {
-	v, err = get()
-	for err == nil && check && goaway.IsProfane(strings.Join(v, "")) {
-		v, err = get()
+	for {
+		v, err := get()
+		switch {
+		case err != nil, !check, !goaway.IsProfane(strings.Join(v, "")):
+			return v, err
+		}
 	}
-	return
 }
 
 func IsClean(s string) bool {
