@@ -235,9 +235,7 @@ func AnyString(minLen uint32, del string) string {
 // empty string.
 func AnySlice(minLen uint32) (out []string) {
 	v, _ := UntilCleanSlice(true, func() ([]string, error) {
-		if len(out) > 0 {
-			clear(out)
-		}
+		out = []string{}
 		var bv *string
 		for len(strings.Join(out, "")) < int(minLen) {
 			if shared.Rnd.Intn(2) == 1 {
