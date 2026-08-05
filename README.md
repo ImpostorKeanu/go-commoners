@@ -22,8 +22,8 @@ func randoAscii(minLen uint32, allowNumbers bool, delimiter string) string {}
 // values.
 func randoAnyString(minLen uint32, delimiter string) string {}
 
-// randoAnyString returns an adjective-noun hostname.
-func randoAnyHostname(nounType string) (string, error) {}
+// randoHostname returns an adjective-noun hostname.
+func randoHostname(nounType string) (string, error) {}
 
 // randoUniqueDNSName generates adjective-noun records until
 // one that _does not resolve_ is created.
